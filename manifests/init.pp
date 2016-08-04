@@ -24,6 +24,7 @@ class msktutil (
   $packagename   = $::msktutil::params::packagename,
   $usereversedns = $::msktutil::params::usereversedns,
   $installed     = $::msktutil::params::installed,
+  $updatehour    = $::msktutil::params::updatehour,
 ) inherits msktutil::params {
 
   Anchor['msktutil::begin'] ->

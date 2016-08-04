@@ -6,8 +6,9 @@ class msktutil::service (
   $group         = $::msktutil::params::group,
   $chmodpath     = $::msktutil::params::chmodpath,
   $keytabmode    = $::msktutil::params::keytabmode,
-  $keytabpath    = $::msktutil::params::keytabpath
-  $installed     = $::msktutil::params::installed
+  $keytabpath    = $::msktutil::params::keytabpath,
+  $installed     = $::msktutil::params::installed,
+  $updatehour    = $::msktutil::params::updatehour,
 ) inherits ::msktutil {
 
   if $installed == absent {
@@ -39,11 +40,11 @@ class msktutil::service (
   
   cron { 'updatekeytab':
     command  => "${msktutilpath} ${dashn} --auto-update",
-    hour     => '11',
+    hour     => $updatehour,
     minute   => absent,
     month    => absent,
     monthday => absent,
-    special  => 'reboot',
+    special  => absent,
     user     => $user,
     ensure   => $installed,
   }

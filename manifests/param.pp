@@ -11,4 +11,5 @@ class msktutil::params {
   $packagename   = 'msktutil',
   $usereversedns = false,
   $installed     = present,
+  $updatehour    = '11',
 }
