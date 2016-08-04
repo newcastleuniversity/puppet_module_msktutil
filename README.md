@@ -1,79 +1,41 @@
-# msktutil
+# Class: msktutil
 
-#### Table of Contents
+Manages Kerberos keytabs on Linux systems in Active Directory environments.
 
-1. [Overview](#overview)
-2. [Module Description - What the module does and why it is useful](#module-description)
-3. [Setup - The basics of getting started with msktutil](#setup)
-    * [What msktutil affects](#what-msktutil-affects)
-    * [Setup requirements](#setup-requirements)
-    * [Beginning with msktutil](#beginning-with-msktutil)
-4. [Usage - Configuration options and additional functionality](#usage)
-5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-5. [Limitations - OS compatibility, etc.](#limitations)
-6. [Development - Guide for contributing to the module](#development)
+## Authors
 
-## Overview
+Helen Griffiths <helen.griffiths@newcastle.ac.uk>
 
-A one-maybe-two sentence summary of what the module does/what problem it solves.
-This is your 30 second elevator pitch for your module. Consider including
-OS/Puppet version it works with.
+## Copyright
 
-## Module Description
-
-If applicable, this section should have a brief description of the technology
-the module integrates with and what that integration enables. This section
-should answer the questions: "What does this module *do*?" and "Why would I use
-it?"
-
-If your module has a range of functionality (installation, configuration,
-management, etc.) this is the time to mention it.
-
-## Setup
-
-### What msktutil affects
-
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form.
-
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled,
-etc.), mention it here.
-
-### Beginning with msktutil
-
-The very basic steps needed for a user to get the module up and running.
-
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you may wish to include an additional section here: Upgrading
-(For an example, see http://forge.puppetlabs.com/puppetlabs/firewall).
+Copyright 2016 University of Newcastle
 
 ## Usage
 
-Put the classes, types, and resources for customizing, configuring, and doing
-the fancy stuff with your module here.
+1. Precreate the computer account in Active Directory and add to it any unusual service principals that you might need.
+2. Reset the precreated computer account.
+3. Create, using Puppet or otherwise, a suitable Kerberos config file to use with your AD.  I recommend that you test this (e.g. by running "kinit" to get a ticket) as this module assumes that a valid Kerberos config exists.
+4. (Optional) Create a group to grant read access to the keytab and add service accounts (e.g. apache) to it.
+5. Install this module into your puppet master.
+6. Include this module if the default params in the param.pp file work for you, or declare it with overrides.
 
-## Reference
+## Distribution-specific oddities
 
-Here, list the classes, types, providers, facts, etc contained in your module.
-This section should include all of the under-the-hood workings of your module so
-people know what the module is touching on their system but don't need to mess
-with things. (We are working on automating this section!)
+Redhat derivatives need to have the EPEL repository enabled.
 
-## Limitations
+## Parameters
 
-This is where you list OS compatibility, version compatibility, etc.
+Default values in param.pp
 
-## Development
-
-Since your module is awesome, other users will want to play with it. Let them
-know what the ground rules for contributing are.
-
-## Release Notes/Contributors/Etc **Optional**
-
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You may also add any additional sections you feel are
-necessary or important to include here. Please use the `## ` header.
+| Parameter      | Type                  | Purpose                                                                                                                                                                                                |
+|----------------|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| $msktutilpath  | String                | Sets full path to msktutil binary.                                                                                                                                                                     |
+| $chmodpath     | String                | Sets full path to chmod binary.                                                                                                                                                                        |
+| $configpath    | String                | Sets full path to Kerberos config file.                                                                                                                                                                |
+| $keytabpath    | String                | Sets full path to Kerberos machine keytab.                                                                                                                                                             |
+| $keytabmode    | String                | Sets Unix permissions over the keytab.                                                                                                                                                                 |
+| $user          | String                | Sets user owner of the keytab.                                                                                                                                                                         |
+| $group         | String                | Sets group owner of the keytab. Set to an override for use with usage step 4 above.                                                                                                                    |
+| $packagename   | String                | Sets the package name according to your distribution.                                                                                                                                                  |
+| $usereversedns | Boolean               | Turns on or off the use of reverse DNS when obtaining tickets from the AD controller. Useful in environments where the AD controller and site DNS server don't agree on the FQDNs of Kerberos clients. |
+| $installed     | "present" or "absent" | Whether to install msktutil or not.  Removes the keytab as well as the package and cron job if set to absent.                                                                                          |
