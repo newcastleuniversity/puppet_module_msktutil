@@ -13,6 +13,8 @@
 # Copyright 2016 University of Newcastle
 #
 
+include stdlib
+
 class msktutil (
   $msktutilpath  = $msktutil::params::msktutilpath,
   $chmodpath     = $msktutil::params::chmodpath,
