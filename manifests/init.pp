@@ -13,8 +13,6 @@
 # Copyright 2016 University of Newcastle
 #
 
-include stdlib
-
 class msktutil (
   $msktutilpath  = $msktutil::params::msktutilpath,
   $chmodpath     = $msktutil::params::chmodpath,
@@ -28,6 +26,9 @@ class msktutil (
   $installed     = $msktutil::params::installed,
   $updatehour    = $msktutil::params::updatehour,
 ) inherits msktutil::params {
+
+  anchor { 'msktutil::begin': }
+  anchor { 'msktutil::end' }
 
   Anchor['msktutil::begin'] ->
     Class['msktutil::install'] ->
