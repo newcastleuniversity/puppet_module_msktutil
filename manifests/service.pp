@@ -27,7 +27,7 @@ class msktutil::service (
       creates => "${keytabpath}",
       user    => $user,
       group   => $group,
-      unless  => $installed 
+      unless  => $installed,
       notify  => Exec['keytabperms'],
     }
     
