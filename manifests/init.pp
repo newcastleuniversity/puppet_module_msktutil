@@ -14,7 +14,7 @@
 #
 
 class msktutil (
-  $msktutilpath  = $msktutil::paramsmsktutilpath,
+  $msktutilpath  = $msktutil::params::msktutilpath,
   $chmodpath     = $msktutil::params::chmodpath,
   $configpath    = $msktutil::params::configpath,
   $keytabpath    = $msktutil::params::keytabpath,

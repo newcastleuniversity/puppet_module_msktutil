@@ -1,14 +1,14 @@
 class msktutil::service (
-  $msktutilpath  = $::msktutil::params::msktutilpath,
-  $packagename   = $::msktutil::params::packagename,
-  $usereversedns = $::msktutil::params::usereversedns,
-  $user          = $::msktutil::params::user,
-  $group         = $::msktutil::params::group,
-  $chmodpath     = $::msktutil::params::chmodpath,
-  $keytabmode    = $::msktutil::params::keytabmode,
-  $keytabpath    = $::msktutil::params::keytabpath,
-  $installed     = $::msktutil::params::installed,
-  $updatehour    = $::msktutil::params::updatehour,
+  $msktutilpath  = $msktutil::paramsmsktutilpath,
+  $packagename   = $msktutil::params::packagename,
+  $usereversedns = $msktutil::params::usereversedns,
+  $user          = $msktutil::params::user,
+  $group         = $msktutil::params::group,
+  $chmodpath     = $msktutil::params::chmodpath,
+  $keytabmode    = $msktutil::params::keytabmode,
+  $keytabpath    = $msktutil::params::keytabpath,
+  $installed     = $msktutil::params::installed,
+  $updatehour    = $msktutil::params::updatehour,
 ) inherits msktutil {
 
   if $installed == absent {
