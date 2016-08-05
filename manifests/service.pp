@@ -9,7 +9,7 @@ class msktutil::service (
   $keytabpath    = $::msktutil::params::keytabpath,
   $installed     = $::msktutil::params::installed,
   $updatehour    = $::msktutil::params::updatehour,
-) inherits ::msktutil {
+) inherits msktutil {
 
   if $installed == absent {
     file { "${keytabpath}":
