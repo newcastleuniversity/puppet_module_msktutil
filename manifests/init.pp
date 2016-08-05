@@ -27,10 +27,10 @@ class msktutil (
   $updatehour    = $::msktutil::params::updatehour,
 ) inherits ::msktutil::params {
 
-  Anchor['msktutil::begin'] ->
-    Class['msktutil::install'] ->
-    Class['msktutil::config']  ->
-    Class['msktutil::service'] ->
-  Anchor['msktutil::end']
+  Anchor['::msktutil::begin'] ->
+    Class['::msktutil::install'] ->
+    Class['::msktutil::config']  ->
+    Class['::msktutil::service'] ->
+  Anchor['::msktutil::end']
   
 }
