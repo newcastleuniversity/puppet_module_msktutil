@@ -23,7 +23,7 @@ class msktutil (
   $group         = $msktutil::params::group,
   $packagename   = $msktutil::params::packagename,
   $usereversedns = $msktutil::params::usereversedns,
-  $installed     = $msktutil::params::installed,
+  $ensure        = $msktutil::params::ensure,
   $updatehour    = $msktutil::params::updatehour,
 ) inherits msktutil::params {
 

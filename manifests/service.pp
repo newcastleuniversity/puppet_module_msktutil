@@ -1,6 +1,6 @@
 class msktutil::service inherits msktutil {
 
-  if $installed == absent {
+  if $ensure == absent {
     file { "${keytabpath}":
       ensure => absent,
     }
@@ -34,7 +34,7 @@ class msktutil::service inherits msktutil {
     monthday => absent,
     special  => absent,
     user     => $user,
-    ensure   => $installed,
+    ensure   => $ensure,
   }
 
 }

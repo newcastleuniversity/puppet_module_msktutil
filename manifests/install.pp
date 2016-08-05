@@ -1,7 +1,7 @@
 class msktutil::install inherits msktutil {
 
   package { 'msktutil':
-    ensure => $installed,
+    ensure => $ensure,
     name   => $packagename,
   }
 
