@@ -1,6 +1,6 @@
 # This class should be considered private
 
-class msktutil::params {
+class msktutil::param {
   $msktutilpath  = '/sbin/msktutil',
   $chmodpath     = '/bin/chmod',
   $configpath    = '/etc/krb5.conf',
