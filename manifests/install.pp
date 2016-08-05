@@ -1,6 +1,6 @@
 class msktutil::install (
-  $installed   = $msktutil::param::installed,
-  $packagename = $msktutil::param::packagename,
+  $installed   = $msktutil::params::installed,
+  $packagename = $msktutil::params::packagename,
 ) inherits msktutil {
 
   package { 'msktutil':
