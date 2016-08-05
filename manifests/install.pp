@@ -1,7 +1,4 @@
-class msktutil::install (
-  $installed   = $msktutil::params::installed,
-  $packagename = $msktutil::params::packagename,
-) inherits msktutil {
+class msktutil::install inherits msktutil {
 
   package { 'msktutil':
     ensure => $installed,
