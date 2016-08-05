@@ -28,7 +28,7 @@ class msktutil (
 ) inherits msktutil::params {
 
   anchor { 'msktutil::begin': }
-  anchor { 'msktutil::end' }
+  anchor { 'msktutil::end': }
 
   Anchor['msktutil::begin'] ->
     Class['msktutil::install'] ->
