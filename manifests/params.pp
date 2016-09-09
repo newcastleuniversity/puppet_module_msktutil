@@ -1,7 +1,14 @@
 # This class should be considered private
 
 class msktutil::params {
-  $msktutilpath  = '/sbin/msktutil'
+  case $osfamily {
+    'Debian': {
+      $msktutilpath  = '/usr/sbin/msktutil'
+    }
+    default: {
+      $msktutilpath  = '/sbin/msktutil'
+    }
+  }
   $chmodpath     = '/bin/chmod'
   $configpath    = '/etc/krb5.conf'
   $keytabpath    = '/etc/krb5.keytab'
