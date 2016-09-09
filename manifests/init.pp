@@ -25,6 +25,7 @@ class msktutil (
   $usereversedns = $msktutil::params::usereversedns,
   $ensure        = $msktutil::params::ensure,
   $updatehour    = $msktutil::params::updatehour,
+  $myhostname    = $msktutil::params::myhostname,
 ) inherits msktutil::params {
 
   anchor { 'msktutil::begin': }
