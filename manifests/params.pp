@@ -20,4 +20,5 @@ class msktutil::params {
   $installed     = present
   $updatehour    = '11'
   $myhostname    = $hostname
+  $ensure        = 'present'
 }
