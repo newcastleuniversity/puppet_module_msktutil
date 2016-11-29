@@ -14,19 +14,19 @@
 #
 
 class msktutil (
-  $msktutilpath  = $msktutil::params::msktutilpath,
-  $chmodpath     = $msktutil::params::chmodpath,
-  $configpath    = $msktutil::params::configpath,
-  $keytabpath    = $msktutil::params::keytabpath,
-  $keytabmode    = $msktutil::params::keytabmode,
-  $user          = $msktutil::params::user,
-  $group         = $msktutil::params::group,
-  $packagename   = $msktutil::params::packagename,
-  $usereversedns = $msktutil::params::usereversedns,
-  $ensure        = $msktutil::params::ensure,
-  $updatehour    = $msktutil::params::updatehour,
-  $myhostname    = $msktutil::params::myhostname,
-) inherits msktutil::params {
+  $msktutilpath,
+  $chmodpath,
+  $configpath,
+  $keytabpath,
+  $keytabmode,
+  $user,
+  $group,
+  $packagename,
+  $usereversedns,
+  $ensure,
+  $updatehour,
+  $myhostname
+) {
 
   anchor { 'msktutil::begin': }
   anchor { 'msktutil::end': }
