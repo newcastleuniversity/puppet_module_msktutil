@@ -2,7 +2,7 @@
 msktutil::chmodpath:     /bin/chmod
 msktutil::configpath:    /etc/krb5.conf
 msktutil::keytabpath:    /etc/krb5.keytab
-msktutil::keytabmode:    '0600'
+msktutil::keytabmode:    "0600"
 msktutil::user:          root
 msktutil::group:         root
 msktutil::packagename:   msktutil

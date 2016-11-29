@@ -5,6 +5,5 @@ hierarchy:
   - name: "OS family"
     backend: yaml
     path: "osfamily/%{facts.os.family}"
- 
   - name: "common"
     backend: yaml

@@ -1,8 +1,8 @@
 {
   "name": "helen-msktutil",
   "version": "0.1.0",
-  "author": "helen",
-  "summary": "Manage keytab creation with msktutil.",
+  "author": "Helen Griffiths (helen.griffiths@newcastle.ac.uk)",
+  "summary": "Manage machine keytab creation with msktutil.",
   "license": "GPL 2+",
   "source": "Workplace Gitlab",
   "project_page": "Workplace Gitlab",
