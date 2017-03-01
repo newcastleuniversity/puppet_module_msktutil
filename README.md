@@ -14,10 +14,14 @@ Copyright 2016 University of Newcastle
 
 1. Precreate the computer account in Active Directory and add to it any unusual service principals that you might need.  You might also need to alter the FQDN of the host within AD to be *```yourmachine```*```.ncl.ac.uk```
 2. Reset the precreated computer account.
-3. Create, using Puppet or otherwise, a suitable Kerberos config file to use with your AD.  I recommend that you test this (e.g. by running "kinit" to get a ticket) as this module assumes that a valid Kerberos config exists.
-4. (Optional) Create a group to grant read access to the keytab and add service accounts (e.g. apache) to it.
-5. Install this module into your puppet master.
-6. Include this module if the default params in the param.pp file work for you, or declare it with overrides.
+3. Ensure you have the Advanced Mode active in the AD management console - right click on the computer object and select Attribute Editor
+4. Scroll to the dNSHostName attribute and enter the hostname of the machine, e.g.: machinename99
+5. Scroll to the servicePrincipleName attribute and enter the FQDN of the machine prefixed by host/, e.g.: host/machinename99.ncl.ac.uk
+6. Create, using Puppet or otherwise, a suitable Kerberos config file to use with your AD.  I recommend that you test this (e.g. by running "kinit" to get a ticket) as this module assumes that a valid Kerberos config exists.
+7. (Optional) Create a group to grant read access to the keytab and add service accounts (e.g. apache) to it.
+8. Install this module into your puppet master.
+9. Include this module if the default params in the param.pp file work for you, or declare it with overrides.
+10. If you want/need to run the command to generate the keytab manually run it as: msktutil --verbose -N --create --computer-name `hostname`
 
 ## Distribution-specific oddities
 
