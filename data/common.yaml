@@ -11,4 +11,5 @@ msktutil::installed:     present
 msktutil::updatehour:    11
 msktutil::myhostname:    "%{::hostname}"
 msktutil::ensure:        present
+msktutil::ensurecrontab: present
 msktutil::msktutilpath:  /sbin/msktutil

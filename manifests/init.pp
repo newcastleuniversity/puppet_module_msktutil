@@ -24,6 +24,7 @@ class msktutil (
   $packagename,
   $usereversedns,
   $ensure,
+  $managecrontab,
   $updatehour,
   $myhostname
 ) {
@@ -33,9 +34,9 @@ class msktutil (
   include msktutil::install
   include msktutil::service
 
-  Anchor['msktutil::begin'] ->
-    Class['msktutil::install'] ->
-    Class['msktutil::service'] ->
-  Anchor['msktutil::end']
-  
+  Anchor['msktutil::begin']
+    -> Class['msktutil::install']
+    -> Class['msktutil::service']
+  -> Anchor['msktutil::end']
+
 }

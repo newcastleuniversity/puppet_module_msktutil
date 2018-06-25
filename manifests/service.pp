@@ -1,41 +1,46 @@
+# manages mskutil keytab rotation
+
 class msktutil::service inherits msktutil {
 
-  if $ensure == absent {
-    file { "${keytabpath}":
+  if $msktutil::ensure == absent {
+    file { "msktutil::keytabpath":
       ensure => absent,
     }
+    $cron = $msktutil::ensure
   } else {
 
-    case $usereversedns {
+    $cron = $msktutil::ensurecrontab
+
+    case $msktutil::usereversedns {
       true:    { $dashn = '' }
       default: { $dashn = '-N' }
     }
 
     exec { 'msktutil':
-      command => "${msktutilpath} ${dashn} --create --computer-name ${myhostname}",
-      creates => "${keytabpath}",
-      user    => $user,
-      group   => $group,
+    command => "${msktutil::msktutilpath} ${msktutil::dashn} --create --computer-name ${myhostname}",
+      creates => $msktutil::keytabpath,
+      user    => $msktutil::user,
+      group   => $msktutil::group,
       notify  => Exec['keytabperms'],
     }
-    
+
     exec { 'keytabperms':
-      command => "${chmodpath} ${keytabmode} ${keytabpath}",
+      command => "${msktutil::chmodpath} ${msktutil::keytabmode} ${msktutil::keytabpath}",
       require => Exec['msktutil'],
     }
-  
+
   }
-  
+
   cron { 'updatekeytab':
-    command  => "${msktutilpath} ${dashn} --auto-update",
-    hour     => $updatehour,
+    command  => "${msktutil::msktutilpath} ${msktutil::dashn} --auto-update",
+    hour     => $msktutil::updatehour,
     minute   => absent,
     month    => absent,
     monthday => absent,
     special  => absent,
-    user     => $user,
-    ensure   => $ensure,
+    user     => $msktutil::user,
+    ensure   => $msktutil::cron,
   }
 
 }
-  
+

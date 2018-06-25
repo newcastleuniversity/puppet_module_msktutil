@@ -1,8 +1,10 @@
+# installs msktutil package
+
 class msktutil::install inherits msktutil {
 
   package { 'msktutil':
-    ensure => $ensure,
-    name   => $packagename,
+    ensure => msktutil::ensure",
+    name   => msktutil::packagename",
   }
 
 }

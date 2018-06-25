@@ -1,15 +1,47 @@
 {
-  "name": "helen-msktutil",
+  "name": "ncsteam-msktutil",
   "version": "0.1.0",
   "author": "Helen Griffiths (helen.griffiths@newcastle.ac.uk)",
   "summary": "Manage machine keytab creation with msktutil.",
-  "license": "GPL 2+",
+  "license": "Apache-2.0",
   "source": "Workplace Gitlab",
   "project_page": "Workplace Gitlab",
   "issues_url": "Workplace Gitlab",
   "dependencies": [
-    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+    {
+      "name": "puppetlabs-stdlib",
+      "version_requirement": ">= 1.0.0 <= 4.25.1"
+    }
   ],
-  "data_provider": "hiera"
-}
+  "data_provider": "hiera",
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "8"
+      ]
+    },
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "7.0"
+      ]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "16.04"
+      ]
+    }
 
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 4.7.0 < 6.0.0"
+    }
+  ],
+  "pdk-version": "1.5.0",
+  "template-url": "file:///opt/puppetlabs/pdk/share/cache/pdk-templates.git",
+  "template-ref": "1.5.0-0-gd1b3eca"
+}
