@@ -12,7 +12,7 @@ class msktutil::service inherits msktutil {
     }
 
     exec { 'msktutil':
-      command => "${msktutilpath} ${dashn} --create",
+      command => "${msktutilpath} ${dashn} --create --computer-name ${myhostname}",
       creates => "${keytabpath}",
       user    => $user,
       group   => $group,

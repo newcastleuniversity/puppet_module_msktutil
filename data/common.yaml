@@ -1,0 +1,14 @@
+---
+msktutil::chmodpath:     /bin/chmod
+msktutil::configpath:    /etc/krb5.conf
+msktutil::keytabpath:    /etc/krb5.keytab
+msktutil::keytabmode:    "0640"
+msktutil::user:          root
+msktutil::group:         root
+msktutil::packagename:   msktutil
+msktutil::usereversedns: false
+msktutil::installed:     present
+msktutil::updatehour:    11
+msktutil::myhostname:    "%{::hostname}"
+msktutil::ensure:        present
+msktutil::msktutilpath:  /sbin/msktutil
