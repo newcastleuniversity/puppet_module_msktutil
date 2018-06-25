@@ -24,7 +24,7 @@ class msktutil (
   $packagename,
   $usereversedns,
   $ensure,
-  $managecrontab,
+  $ensurecrontab,
   $updatehour,
   $myhostname
 ) {
