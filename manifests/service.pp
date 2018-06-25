@@ -31,15 +31,12 @@ class msktutil::service inherits msktutil {
 
   }
 
-  cron { 'updatekeytab':
-    ensure   => $cron,
-    command  => "${msktutil::msktutilpath} ${dashn} --auto-update",
-    hour     => $msktutil::updatehour,
-    minute   => absent,
-    month    => absent,
-    monthday => absent,
-    special  => absent,
-    user     => $msktutil::user,
+  file { "msktutil-cronstub":
+    ensure  => present,
+    mode    => '0755',
+    user    => $msktutil::user,
+    path    => $msktutil::cronstub,
+    content => "${msktutil::msktutilpath} ${dashn} --auto-update --auto-update-interval ${msktutil::keytabreplace} --computer-name %{facts.networking.hostname}",
   }
 
 }

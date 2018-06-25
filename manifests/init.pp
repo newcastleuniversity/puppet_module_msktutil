@@ -24,9 +24,9 @@ class msktutil (
   $packagename,
   $usereversedns,
   $ensure,
-  $ensurecrontab,
-  $updatehour,
-  $myhostname
+  $ensurecron,
+  $myhostname,
+  $keytabreplace
 ) {
 
   anchor { 'msktutil::begin': }
