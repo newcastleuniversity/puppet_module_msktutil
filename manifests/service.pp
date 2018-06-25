@@ -31,12 +31,12 @@ class msktutil::service inherits msktutil {
 
   }
 
-  file { "msktutil-cronstub":
+  file { 'msktutil-cronstub':
     ensure  => present,
     mode    => '0755',
     user    => $msktutil::user,
     path    => $msktutil::cronstub,
-    content => "${msktutil::msktutilpath} ${dashn} --auto-update --auto-update-interval ${msktutil::keytabreplace} --computer-name %{facts.networking.hostname}",
+    content => "${msktutil::msktutilpath} ${dashn} --auto-update --auto-update-interval ${msktutil::keytabreplace} --computer-name %{facts.networking.hostname}", # lint:ignore:140chars
   }
 
 }
