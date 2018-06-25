@@ -32,7 +32,7 @@ class msktutil::service inherits msktutil {
   }
 
   file { 'msktutil-cronstub':
-    ensure  => present,
+    ensure  => file,
     mode    => '0755',
     owner   => $msktutil::user,
     path    => $msktutil::cronstub,
