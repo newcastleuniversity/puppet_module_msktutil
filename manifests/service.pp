@@ -3,7 +3,7 @@
 class msktutil::service inherits msktutil {
 
   if $msktutil::ensure == absent {
-    file { "msktutil::keytabpath":
+    file { $msktutil::keytabpath:
       ensure => absent,
     }
     $cron = $msktutil::ensure
@@ -17,7 +17,7 @@ class msktutil::service inherits msktutil {
     }
 
     exec { 'msktutil':
-    command => "${msktutil::msktutilpath} ${msktutil::dashn} --create --computer-name ${myhostname}",
+      command => "${msktutil::msktutilpath} ${msktutil::dashn} --create --computer-name ${msktutil::myhostname}",
       creates => $msktutil::keytabpath,
       user    => $msktutil::user,
       group   => $msktutil::group,
@@ -32,6 +32,7 @@ class msktutil::service inherits msktutil {
   }
 
   cron { 'updatekeytab':
+    ensure   => $msktutil::cron,
     command  => "${msktutil::msktutilpath} ${msktutil::dashn} --auto-update",
     hour     => $msktutil::updatehour,
     minute   => absent,
@@ -39,7 +40,6 @@ class msktutil::service inherits msktutil {
     monthday => absent,
     special  => absent,
     user     => $msktutil::user,
-    ensure   => $msktutil::cron,
   }
 
 }

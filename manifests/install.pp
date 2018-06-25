@@ -3,8 +3,8 @@
 class msktutil::install inherits msktutil {
 
   package { 'msktutil':
-    ensure => msktutil::ensure",
-    name   => msktutil::packagename",
+    ensure => $msktutil::ensure,
+    name   => $msktutil::packagename,
   }
 
 }
