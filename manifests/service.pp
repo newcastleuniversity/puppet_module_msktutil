@@ -36,7 +36,7 @@ class msktutil::service inherits msktutil {
     mode    => '0755',
     owner   => $msktutil::user,
     path    => $msktutil::cronstub,
-    content => "${msktutil::msktutilpath} ${dashn} --auto-update --auto-update-interval ${msktutil::keytabreplace} --computer-name ${facts['networking]['hostname']}", # lint:ignore:140chars
+    content => "${msktutil::msktutilpath} ${dashn} --auto-update --auto-update-interval ${msktutil::keytabreplace} --computer-name ${facts['networking']['hostname']}", # lint:ignore:140chars
   }
 
 }
