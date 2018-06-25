@@ -32,8 +32,8 @@ class msktutil::service inherits msktutil {
   }
 
   cron { 'updatekeytab':
-    ensure   => $msktutil::cron,
-    command  => "${msktutil::msktutilpath} ${msktutil::dashn} --auto-update",
+    ensure   => $cron,
+    command  => "${msktutil::msktutilpath} ${dashn} --auto-update",
     hour     => $msktutil::updatehour,
     minute   => absent,
     month    => absent,
