@@ -17,7 +17,7 @@ class msktutil::service inherits msktutil {
     }
 
     exec { 'msktutil':
-      command => "${msktutil::msktutilpath} ${msktutil::dashn} --create --computer-name ${msktutil::myhostname}",
+      command => "${msktutil::msktutilpath} ${dashn} --create --computer-name ${msktutil::myhostname}",
       creates => $msktutil::keytabpath,
       user    => $msktutil::user,
       group   => $msktutil::group,
