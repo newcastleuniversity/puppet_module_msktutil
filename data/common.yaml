@@ -13,4 +13,4 @@ msktutil::ensure:        present
 msktutil::ensurecron:    present
 msktutil::msktutilpath:  /sbin/msktutil
 msktutil::cronstub:      /etc/cron.daily/msktutil
-msktutil::keytabreplace: 15
+msktutil::keytabreplace: 60
