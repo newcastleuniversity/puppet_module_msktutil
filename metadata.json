@@ -11,14 +11,20 @@
     {
       "name": "puppetlabs-stdlib",
       "version_requirement": ">= 1.0.0 <= 4.25.1"
-    }
+    },
   ],
   "data_provider": "hiera",
   "operatingsystem_support": [
     {
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
-        "8"
+        "8", "9"
+      ]
+    },
+    {
+      "operatingsystem": "Raspbian",
+      "operatingsystemrelease": [
+        "8", "9"
       ]
     },
     {
@@ -30,7 +36,7 @@
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
-        "16.04"
+        "16.04", "18.04"
       ]
     }
 

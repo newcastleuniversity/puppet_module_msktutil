@@ -9,7 +9,7 @@ class msktutil::service inherits msktutil {
     $cron = $msktutil::ensure
   } else {
 
-    $cron = $msktutil::ensurecrontab
+    $cron = $msktutil::ensurecron
 
     case $msktutil::usereversedns {
       true:    { $dashn = '' }
@@ -17,7 +17,7 @@ class msktutil::service inherits msktutil {
     }
 
     exec { 'msktutil':
-      command => "${msktutil::msktutilpath} ${dashn} --create --computer-name ${msktutil::myhostname}",
+      command => "${msktutil::msktutilpath} ${dashn} --create --computer-name ${msktutil::myhostname} --hostname ${msktutil::myfqdn}",
       creates => $msktutil::keytabpath,
       user    => $msktutil::user,
       group   => $msktutil::group,
@@ -31,12 +31,10 @@ class msktutil::service inherits msktutil {
 
   }
 
-  file { 'msktutil-cronstub':
-    ensure  => file,
-    mode    => '0755',
-    owner   => $msktutil::user,
-    path    => $msktutil::cronstub,
-    content => "#!/bin/sh\n${msktutil::msktutilpath} ${dashn} --auto-update --auto-update-interval ${msktutil::keytabreplace} --computer-name ${msktutil::myhostname}", # lint:ignore:140chars
+  $msktutil::files.each | $file, $params | {
+    file { $file:
+      * => $params,
+    }
   }
 
 }
