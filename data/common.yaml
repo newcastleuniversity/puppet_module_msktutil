@@ -1,4 +1,5 @@
 ---
+
 msktutil::chmodpath:     /bin/chmod
 msktutil::configpath:    /etc/krb5.conf
 msktutil::keytabpath:    /etc/krb5.keytab
@@ -9,29 +10,29 @@ msktutil::packagename:   msktutil
 msktutil::usereversedns: false
 msktutil::installed:     present
 msktutil::ensure:        present
-msktutil::ensurecron:    present
+msktutil::makekeytab:    yes
+msktutil::cron:          yes
 msktutil::msktutilpath:  /sbin/msktutil
-msktutil::cronstub:      /etc/cron.daily/msktutil
 msktutil::keytabreplace: 60
 msktutil::packages:
   - msktutil
-msktutil::extraopts: "--service host/%{facts['hostname']} --service host/%{facts['fqdn']}"
+msktutil::extraopts: "--service host/%{facts.hostname} --service host/%{facts.fqdn}"
 msktutil::cronfiles:
-  crontab:
+  cronopts:
+    ensure: absent
+    path: /etc/defaults/msktutil
+  cronstub:
     ensure:  file
     mode:    '0700'
-    owner:   "%{mskutil::user}"
-    path:    "%{mskutil::cronstub}"
+    owner:   "%{msktutil::user}"
+    path:    '/etc/cron.daily/msktutil'
+    # content: "template('msktutil/cronstub.common')"
     content: |+
       #!/bin/sh
       %{msktutil::msktutilpath} \
-        ${dashn} \
         --auto-update \
-        --auto-update-interval ${msktutil::keytabreplace} \
-        --computer-name ${msktutil::myhostname} \
-        --hostname ${msktutil::myfqdn} \
+        --auto-update-interval %{msktutil::keytabreplace} \
+        ${dashn} \
+        --computer-name %{facts.hostname} \
+        --hostname %{facts.fqdn} \
         %{msktutil::extraopts}
-
-  cronoptions:
-    ensure: absent
-    path:   /etc/default/msktutil

@@ -1,27 +1,31 @@
 ---
 msktutil::msktutilpath: /usr/sbin/msktutil
+msktutil::cronopts: '/etc/defaults/msktutil'
 
 msktutil::files:
-  crontab:
+  cronstub:
+    ensure:  file
     mode:    '0700'
-    owner:   "%{mskutil::user}"
-    path:    "%{mskutil::cronstub}"
+    owner:   "%{msktutil::user}"
+    path:    '/etc/cron.daily/msktutil'
+    # content: "template('msktutil/cronstub.Debian')"
     content: |+
       #!/bin/sh
 
-      test -x /usr/sbin/msktutil || exit 0
+      test -x %{msktutil::msktutilpath} || exit 0
 
-      # These options are overridden in /etc/default/msktutil.
+      # These options are overridden in %{msktutil::cronopts}.
       # Edit there, not here.
       AUTOUPDATE_ENABLED="false"
       AUTOUPDATE_OPTIONS=""
 
-      [ -r /etc/default/msktutil ] && . /etc/default/msktutil
+      [ -r %{msktutil::cronopts} ] && . %{msktutil::cronopts}
 
       [ "$AUTOUPDATE_ENABLED" = "true" ] || exit 0
-      exec /usr/sbin/msktutil --auto-update $AUTOUPDATE_OPTIONS
+      exec %{msktutil::msktutilpath} --auto-update $AUTOUPDATE_OPTIONS
   cronoptions:
+    ensure:  file
     mode:    '0644'
-    owner:   "%{mskutil::user}"
-    path:    /etc/default/msktutil
+    owner:   "%{msktutil::user}"
+    path:    "%{msktutil::cronopts}"
     content: "template('msktutil/cronoptions.erb')"

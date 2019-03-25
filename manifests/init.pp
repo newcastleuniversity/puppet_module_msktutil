@@ -18,16 +18,19 @@ class msktutil (
   Optional[Stdlib::Unixpath] $chmodpath,
   Optional[Stdlib::Unixpath] $configpath,
   Optional[Stdlib::Unixpath] $keytabpath,
+  Optional[Stdlib::Unixpath] $cronstub,
+  Optional[Stdlib::Unixpath] $cronopts,
   Optional[Stdlib::Filemode] $keytabmode,
   Optional[Integer] $keytabreplace,
   Optional[String] $user,
   Optional[String] $group,
   Optional[Array] $packages,
-  Optional[Variant[Enum['true', 'false', 'yes', 'no'], Boolean] $usereversedns,
-  Optional[Variant[Enum['true', 'false', 'yes', 'no', 'present', 'absent'], Boolean] $ensure,
-  Optional[Variant[Enum['true', 'false', 'yes', 'no'], Boolean] $makekeytab,
-  Optional[Variant[Enum['true', 'false', 'yes', 'no'], Boolean] $cron,
-  Optional[Hash] $files
+  Optional[Variant[Enum['true', 'false', 'yes', 'no'], Boolean]] $usereversedns,
+  Optional[Variant[Enum['true', 'false', 'yes', 'no', 'present', 'absent'], Boolean]] $ensure,
+  Optional[Variant[Enum['true', 'false', 'yes', 'no'], Boolean]] $makekeytab,
+  Optional[Variant[Enum['true', 'false', 'yes', 'no'], Boolean]] $cron,
+  Optional[Hash] $cronfiles,
+  Optional[String] $extraopts
 ) {
 
   case $msktutil::usereversedns {
@@ -56,8 +59,8 @@ class msktutil (
       $realcron       = false
     }
     default: {
-      $realmakekeytab = $makekeytab
-      $realcron       = $cron
+      $realmakekeytab = $msktutil::makekeytab
+      $realcron       = $msktutil::cron
     }
   }
 

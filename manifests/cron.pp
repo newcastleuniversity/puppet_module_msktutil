@@ -1,4 +1,4 @@
-# manages mskutil keytab rotation
+# manages msktutil keytab rotation
 
 class msktutil::cron inherits msktutil {
 
@@ -13,10 +13,7 @@ class msktutil::cron inherits msktutil {
     default: {
       $msktutil::cronfiles.each | $file, $params | {
         file { $file:
-          default: {
-            ensure => file
-          }
-          * => $params,
+          * => $params
         }
       }
     }
