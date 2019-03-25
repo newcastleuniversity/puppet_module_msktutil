@@ -1,6 +1,6 @@
 # manages mskutil keytab rotation
 
-class msktutil::service inherits msktutil {
+class msktutil::cron inherits msktutil {
 
   if $msktutil::ensure == absent {
     file { $msktutil::keytabpath:

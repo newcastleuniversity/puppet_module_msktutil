@@ -33,11 +33,11 @@ class msktutil (
   anchor { 'msktutil::begin': }
   anchor { 'msktutil::end': }
   include msktutil::install
-  include msktutil::service
+  include msktutil::cron
 
   Anchor['msktutil::begin']
     -> Class['msktutil::install']
-    -> Class['msktutil::service']
+    -> Class['msktutil::cron']
   -> Anchor['msktutil::end']
 
 }
