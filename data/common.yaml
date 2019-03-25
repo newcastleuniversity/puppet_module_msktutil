@@ -8,28 +8,30 @@ msktutil::group:         root
 msktutil::packagename:   msktutil
 msktutil::usereversedns: false
 msktutil::installed:     present
-msktutil::myhostname:    "%{::hostname}"
-msktutil::myfqdn:        "%{::fqdn}"
 msktutil::ensure:        present
 msktutil::ensurecron:    present
 msktutil::msktutilpath:  /sbin/msktutil
 msktutil::cronstub:      /etc/cron.daily/msktutil
 msktutil::keytabreplace: 60
-msktutil::files:
+msktutil::packages:
+  - msktutil
+msktutil::extraopts: "--service host/%{facts['hostname']} --service host/%{facts['fqdn']}"
+msktutil::cronfiles:
   crontab:
-    ensure: file
-    mode: '0700'
-    owner: "%{mskutil::user}"
-    path: "%{mskutil::cronstub}"
+    ensure:  file
+    mode:    '0700'
+    owner:   "%{mskutil::user}"
+    path:    "%{mskutil::cronstub}"
     content: |+
       #!/bin/sh
-      ${msktutil::msktutilpath} \
+      %{msktutil::msktutilpath} \
         ${dashn} \
         --auto-update \
         --auto-update-interval ${msktutil::keytabreplace} \
         --computer-name ${msktutil::myhostname} \
         --hostname ${msktutil::myfqdn} \
-        
+        %{msktutil::extraopts}
+
   cronoptions:
     ensure: absent
-    path: /etc/default/msktutil
+    path:   /etc/default/msktutil

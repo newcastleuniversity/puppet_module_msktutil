@@ -8,27 +8,60 @@ Helen Griffiths <helen.griffiths@newcastle.ac.uk>
 
 ## Copyright
 
-Copyright 2016 University of Newcastle
+Copyright 2016-19 University of Newcastle
 
 ## Usage
+
+With Linux:
+
+```Shell
+# kinit tickets with an s-id.
+kinit sabc123
+
+# run this with modifications.
+# wrap this in a loop to create many new machine accounts.
+/usr/sbin/msktutil \
+  --precreate \
+  --computer-name $pi \
+  --hostname $pi.ncl.ac.uk \
+  --user-creds-only \
+  --service host/$pi.ncl.ac.uk \
+  --service host/$pi.campus.ncl.ac.uk \
+  --service host/$pi \
+  --no-reverse-lookups \
+  --description 'Flat floor Pi. Raspbian Stretch, managed with Puppet 5.' \
+  --base 'OU=Flat_Floor_Pis,OU=Linux,OU=Workstation,OU=D-COMP,OU=SAgE_Schools_and_Units,OU=SAgE_Faculty,OU=Departments'
+```
+
+Replace $pi and description and base.
+
+With Windows:
 
 1. Precreate the computer account in Active Directory and add to it any unusual service principals that you might need.  You might also need to alter the FQDN of the host within AD to be *```yourmachine```*```.ncl.ac.uk```
 2. Reset the precreated computer account.
 3. Ensure you have the Advanced Mode active in the AD management console - right click on the computer object and select Attribute Editor
-4. Scroll to the dNSHostName attribute and enter the hostname of the machine, e.g.: machinename99
+4. Scroll to the dNSHostName attribute and enter the FQDN of the machine, e.g.: machinename99.ncl.ac.uk
 5. Scroll to the servicePrincipleName attribute and enter the FQDN of the machine prefixed by host/, e.g.: host/machinename99.ncl.ac.uk
 
-*end here if not using Puppet to manage the host*
-
-6. (Optional if using Puppet) Create, using Puppet or otherwise, a suitable Kerberos config file to use with your AD.  I recommend that you test this (e.g. by running "kinit" to get a ticket) as this module assumes that a valid Kerberos config exists.
-7. (Optional) Create a group to grant read access to the keytab and add service accounts (e.g. apache) to it.
-8. Install this module into your puppet master.
-9. Include this module if the default params in the param.pp file work for you, or declare it with overrides.
-10. If you want/need to run the command to generate the keytab manually run it as: msktutil --verbose -N --create --computer-name `hostname`
+Creating Powershell to do the above is left as an exercise for the reader.
 
 ## Distribution-specific oddities
 
 Redhat derivatives need to have the EPEL repository enabled.
+
+## New parameters
+
+### $ensure
+- whether to install and manage msktutil at all.
+- True or false, present or absent
+
+### $makekeytab
+- whether to make or remove the keytab.
+- True or false, present or absent
+
+### $cron
+- whether to manage keytab rotation.
+- True or false, present or absent
 
 ## Parameters
 

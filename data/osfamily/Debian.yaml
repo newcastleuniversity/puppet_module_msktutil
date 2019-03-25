@@ -1,12 +1,11 @@
 ---
-msktutil::msktutilpath:  /usr/sbin/msktutil
+msktutil::msktutilpath: /usr/sbin/msktutil
 
 msktutil::files:
   crontab:
-    ensure: file
-    mode: '0700'
-    owner: "%{mskutil::user}"
-    path: "%{mskutil::cronstub}"
+    mode:    '0700'
+    owner:   "%{mskutil::user}"
+    path:    "%{mskutil::cronstub}"
     content: |+
       #!/bin/sh
 
@@ -22,8 +21,7 @@ msktutil::files:
       [ "$AUTOUPDATE_ENABLED" = "true" ] || exit 0
       exec /usr/sbin/msktutil --auto-update $AUTOUPDATE_OPTIONS
   cronoptions:
-    ensure: file
-    mode: '0644'
-    owner: "%{mskutil::user}"
-    path: /etc/default/msktutil
+    mode:    '0644'
+    owner:   "%{mskutil::user}"
+    path:    /etc/default/msktutil
     content: "template('msktutil/cronoptions.erb')"

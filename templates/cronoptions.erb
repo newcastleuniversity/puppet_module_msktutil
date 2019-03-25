@@ -1,0 +1,2 @@
+AUTOUPDATE_ENABLED="true"
+AUTOUPDATE_OPTIONS="<%= @dashn %> --computer-name <%= scope('facts::hostname') %> --hostname <%= scope('facts::fqdn') %> <%= @otherropts %>""
