@@ -3,19 +3,20 @@
 class msktutil::cron inherits msktutil {
 
   case $msktutil::realcron {
-    'false', 'no', false: {
-      $msktutil::cronfiles.each | $file, $params | {
-        file { $file:
-          ensure => absent
-        }
-      }
+    'no', false: {
+      $ensure = absent
     }
     default: {
-      $msktutil::cronfiles.each | $file, $params | {
-        file { $file:
-          * => $params
-        }
-      }
+      $ensure = file
+    }
+  }
+  $msktutil::cronfiles.each | $file, $params | {
+    file {
+      default:
+        ensure => $ensure
+      ;
+      $file:
+        * => $params
     }
   }
 }

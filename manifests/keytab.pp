@@ -1,11 +1,13 @@
+# Creates the keytab.
+
 class msktutil::keytab inherits msktutil {
 
   case $msktutil::realmakekeytab {
-    'true', 'yes', true: {
+    'yes', true: {
       exec { 'msktutil':
         command => "${msktutil::msktutilpath} --create ${msktutil::dashn} --computer-name ${facts['hostname']} --hostname ${facts['fqdn']} ${msktutil::extraopts}",
         creates => $msktutil::keytabpath,
-        user    => $msktutil::user,
+        user    => 'root',
         group   => $msktutil::group,
       }
       exec { 'chmod':

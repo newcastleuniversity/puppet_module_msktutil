@@ -3,11 +3,11 @@
 class msktutil::install inherits msktutil {
 
   case $msktutil::ensure {
-    'absent', 'no', 'false', false: {
+    'absent', 'no', false: {
       $install = absent
     }
     default: {
-      $install = present
+      $install = installed
     }
   }
 

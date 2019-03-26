@@ -4,7 +4,6 @@ msktutil::chmodpath:     /bin/chmod
 msktutil::configpath:    /etc/krb5.conf
 msktutil::keytabpath:    /etc/krb5.keytab
 msktutil::keytabmode:    '0640'
-msktutil::user:          root
 msktutil::group:         root
 msktutil::packagename:   msktutil
 msktutil::usereversedns: false
@@ -18,21 +17,8 @@ msktutil::packages:
   - msktutil
 msktutil::extraopts: "--service host/%{facts.hostname} --service host/%{facts.fqdn}"
 msktutil::cronfiles:
-  cronopts:
-    ensure: absent
-    path: /etc/defaults/msktutil
   cronstub:
-    ensure:  file
     mode:    '0700'
-    owner:   "%{msktutil::user}"
+    owner:   root
     path:    '/etc/cron.daily/msktutil'
-    # content: "template('msktutil/cronstub.common')"
-    content: |+
-      #!/bin/sh
-      %{msktutil::msktutilpath} \
-        --auto-update \
-        --auto-update-interval %{msktutil::keytabreplace} \
-        ${dashn} \
-        --computer-name %{facts.hostname} \
-        --hostname %{facts.fqdn} \
-        %{msktutil::extraopts}
+    content: "template('msktutil/cronstub.erb')"

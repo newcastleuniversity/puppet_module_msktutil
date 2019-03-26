@@ -18,24 +18,21 @@ class msktutil (
   Optional[Stdlib::Unixpath] $chmodpath,
   Optional[Stdlib::Unixpath] $configpath,
   Optional[Stdlib::Unixpath] $keytabpath,
-  Optional[Stdlib::Unixpath] $cronstub,
-  Optional[Stdlib::Unixpath] $cronopts,
   Optional[Stdlib::Filemode] $keytabmode,
   Optional[Integer] $keytabreplace,
-  Optional[String] $user,
   Optional[String] $group,
   Optional[Array] $packages,
-  Optional[Variant[Enum['true', 'false', 'yes', 'no'], Boolean]] $usereversedns,
-  Optional[Variant[Enum['true', 'false', 'yes', 'no', 'present', 'absent'], Boolean]] $ensure,
-  Optional[Variant[Enum['true', 'false', 'yes', 'no'], Boolean]] $makekeytab,
-  Optional[Variant[Enum['true', 'false', 'yes', 'no'], Boolean]] $cron,
+  Optional[Variant[Enum['yes', 'no'], Boolean]] $usereversedns,
+  Optional[Variant[Enum['yes', 'no', 'present', 'absent'], Boolean]] $ensure,
+  Optional[Variant[Enum['yes', 'no'], Boolean]] $makekeytab,
+  Optional[Variant[Enum['yes', 'no'], Boolean]] $cron,
   Optional[Hash] $cronfiles,
   Optional[String] $extraopts
 ) {
 
   case $msktutil::usereversedns {
-    'true', 'yes', true: { $dashn = '' }
-    default:             { $dashn = '--no-reverse-lookups' }
+    'yes', true: { $dashn = '' }
+    default: { $dashn = '--no-reverse-lookups' }
   }
 
   # if the whole class is marked as absent:
@@ -54,7 +51,7 @@ class msktutil (
   #   remove cron files used by this distro
 
   case $msktutil::ensure {
-    'absent', 'no', 'false', false: {
+    'absent', 'no', false: {
       $realmakekeytab = false
       $realcron       = false
     }

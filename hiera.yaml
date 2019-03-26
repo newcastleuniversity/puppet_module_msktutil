@@ -5,6 +5,6 @@ defaults:
   datadir: data
 hierarchy:
   - name: "osfamily"
-    path: "osfamily/%{osfamily}.yaml"
+    path: "osfamily/%{facts.osfamily}.yaml"
   - name: "common"
     path: "common.yaml"

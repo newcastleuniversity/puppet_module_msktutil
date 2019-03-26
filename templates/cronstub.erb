@@ -1,0 +1,10 @@
+# This file managed by NUIT using Puppet.
+
+#!/bin/sh
+<%= @msktutilpath %> \
+  --auto-update \
+  --auto-update-interval <%= @keytabreplace %> \
+  <%= @dashn %> \
+  --computer-name <%= @facts['hostname'] %> \
+  --hostname <%= @facts['fqdn'] %> \
+  <%= @extraopts %>

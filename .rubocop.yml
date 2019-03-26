@@ -5,6 +5,7 @@ AllCops:
   TargetRubyVersion: '2.1'
   Include:
   - "./**/*.rb"
+  - "./**/*.erb"
   Exclude:
   - bin/*
   - ".vendor/**/*"

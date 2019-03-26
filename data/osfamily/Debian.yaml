@@ -1,31 +1,15 @@
 ---
 msktutil::msktutilpath: /usr/sbin/msktutil
-msktutil::cronopts: '/etc/defaults/msktutil'
 
-msktutil::files:
+# don't specify "ensure", that's toggled in cron.pp
+msktutil::cronfiles:
   cronstub:
-    ensure:  file
     mode:    '0700'
-    owner:   "%{msktutil::user}"
+    owner:   root
     path:    '/etc/cron.daily/msktutil'
-    # content: "template('msktutil/cronstub.Debian')"
-    content: |+
-      #!/bin/sh
-
-      test -x %{msktutil::msktutilpath} || exit 0
-
-      # These options are overridden in %{msktutil::cronopts}.
-      # Edit there, not here.
-      AUTOUPDATE_ENABLED="false"
-      AUTOUPDATE_OPTIONS=""
-
-      [ -r %{msktutil::cronopts} ] && . %{msktutil::cronopts}
-
-      [ "$AUTOUPDATE_ENABLED" = "true" ] || exit 0
-      exec %{msktutil::msktutilpath} --auto-update $AUTOUPDATE_OPTIONS
+    content: "template('msktutil/Debian.cronstub.erb')"
   cronoptions:
-    ensure:  file
     mode:    '0644'
-    owner:   "%{msktutil::user}"
-    path:    "%{msktutil::cronopts}"
-    content: "template('msktutil/cronoptions.erb')"
+    owner:   root
+    path:    /etc/defaults/msktutil
+    content: "template('msktutil/Debian.cronoptions.erb')"
