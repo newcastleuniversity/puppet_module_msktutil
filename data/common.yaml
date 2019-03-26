@@ -1,5 +1,11 @@
 ---
 
+lookup_options:
+  msktutil::cronfiles:
+    deep
+  msktutil::packages:
+    unique
+
 msktutil::chmodpath:     /bin/chmod
 msktutil::configpath:    /etc/krb5.conf
 msktutil::keytabpath:    /etc/krb5.keytab
@@ -16,9 +22,11 @@ msktutil::keytabreplace: 60
 msktutil::packages:
   - msktutil
 msktutil::extraopts: "--service host/%{facts.hostname} --service host/%{facts.fqdn}"
+
 msktutil::cronfiles:
   cronstub:
-    mode:    '0700'
-    owner:   root
-    path:    '/etc/cron.daily/msktutil'
-    content: "template('msktutil/cronstub.erb')"
+    params:
+      mode:  '0700'
+      owner: root
+      path:  '/etc/cron.daily/msktutil'
+    template: msktutil/cronstub.erb

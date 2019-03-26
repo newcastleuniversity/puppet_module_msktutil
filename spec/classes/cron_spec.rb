@@ -1,15 +1,48 @@
 require 'spec_helper'
 describe 'msktutil' do
-  on_supported_os.each do |os, os_facts|
+  let(:node) { 'example.ncl.ac.uk' }
+
+  on_supported_os.each do |os, facts|
     let :facts do
-      os_facts
+      facts
     end
 
     context "install to #{os}" do
-      it { is_expected.to contain_file('cronstub').with_ensure('file') }
-      case os_facts[:osfamily]
+      case facts[:osfamily]
       when 'Debian'
-        it { is_expected.to contain_file('cronoptions').with_ensure('file') }
+        it {
+          is_expected.to contain_file('cronoptions').with(
+            'ensure'  => 'file',
+            'content' => %r{--no-reverse-lookups --computer-name example --hostname example.ncl.ac.uk --service host/example --service host/example.ncl.ac.uk},
+          )
+        }
+        it {
+          is_expected.to contain_file('cronstub').with(
+            'ensure'  => 'file',
+            'content' => %r{[ "$AUTOUPDATE_ENABLED" = "true" ] || exit 0},
+          )
+        }
+      else
+        it {
+          is_expected.to contain_file('cronstub').with(
+            'ensure'  => 'file',
+            'content' => %r{--auto-update-interval 60},
+          )
+        }
+        it { is_expected.not_to contain_file('cronoptions') }
+      end
+    end
+
+    context "install to #{os} without reverse lookup" do
+      it { is_expected.to contain_file('cronstub').with('ensure' => 'file') }
+      case facts[:osfamily]
+      when 'Debian'
+        it {
+          is_expected.to contain_file('cronoptions').with(
+            'ensure' => 'file',
+            'content' => %r{--no-reverse-lookups --computer-name example --hostname example.ncl.ac.uk --service host/example --service host/example.ncl.ac.uk},
+          )
+        }
       end
     end
 
@@ -20,10 +53,10 @@ describe 'msktutil' do
         }
       end
 
-      it { is_expected.to contain_file('cronstub').with_ensure('absent') }
-      case os_facts[:osfamily]
+      it { is_expected.to contain_file('cronstub').with('ensure' => 'absent') }
+      case facts[:osfamily]
       when 'Debian'
-        it { is_expected.to contain_file('cronoptions').with_ensure('absent') }
+        it { is_expected.to contain_file('cronoptions').with('ensure' => 'absent') }
       end
     end
   end

@@ -10,13 +10,14 @@ class msktutil::cron inherits msktutil {
       $ensure = file
     }
   }
-  $msktutil::cronfiles.each | $file, $params | {
+  $msktutil::cronfiles.each | $file, $item | {
     file {
       default:
-        ensure => $ensure
+        ensure  => $ensure,
+        content => template($item['template'])
       ;
       $file:
-        * => $params
+        * => $item['params']
     }
   }
 }
