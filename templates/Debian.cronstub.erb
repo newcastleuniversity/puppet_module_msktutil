@@ -2,12 +2,12 @@
 
 test -x <%= @msktutilpath %> || exit 0
 
-# These options are overridden in /etc/defaults/msktutil.
+# These options are overridden in /etc/default/msktutil.
 # Edit there, not here.
 AUTOUPDATE_ENABLED="false"
 AUTOUPDATE_OPTIONS=""
 
-[ -r /etc/defaults/msktutil ] && . /etc/defaults/msktutil
+[ -r /etc/default/msktutil ] && . /etc/default/msktutil
 
 [ "$AUTOUPDATE_ENABLED" = "true" ] || exit 0
 exec <%= @msktutilpath %> --auto-update $AUTOUPDATE_OPTIONS
