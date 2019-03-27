@@ -1,17 +1,15 @@
 ---
 msktutil::msktutilpath: /usr/sbin/msktutil
-
-# don't specify "ensure", that's toggled in cron.pp
 msktutil::cronfiles:
-  cronstub:
-    params:
-      mode:  '0700'
-      owner: root
-      path:  /etc/cron.daily/msktutil
-    template: msktutil/Debian.cronstub.erb
   cronoptions:
     params:
       mode:  '0644'
       owner: root
-      path:  /etc/defaults/msktutil
+      path:  '/etc/defaults/msktutil'
     template: msktutil/Debian.cronoptions.erb
+#  'cronstub':
+#    params:
+#      mode:  '0700'
+#      owner: root
+#      path:  '/etc/cron.daily/msktutil'
+#    template: msktutil/Debian.cronstub.erb

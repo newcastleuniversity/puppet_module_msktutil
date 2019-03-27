@@ -10,6 +10,7 @@ describe 'msktutil' do
     context "install to #{os}" do
       case facts[:osfamily]
       when 'Debian'
+        it { is_expected.to contain_notify('filename is cronoptions') }
         it {
           is_expected.to contain_file('cronoptions').with(
             'ensure'  => 'file',
@@ -22,6 +23,7 @@ describe 'msktutil' do
             'content' => %r{[ "$AUTOUPDATE_ENABLED" = "true" ] || exit 0},
           )
         }
+        it { is_expected.to have_file_resource_count(2) }
       else
         it {
           is_expected.to contain_file('cronstub').with(
@@ -30,22 +32,44 @@ describe 'msktutil' do
           )
         }
         it { is_expected.not_to contain_file('cronoptions') }
+        it { is_expected.to have_file_resource_count(1) }
       end
     end
 
-    context "install to #{os} without reverse lookup" do
-      it { is_expected.to contain_file('cronstub').with('ensure' => 'file') }
+    context "install to #{os} with reverse lookup" do
+      let :params do
+        {
+          'usereversedns' => 'yes',
+        }
+      end
+
       case facts[:osfamily]
       when 'Debian'
         it {
-          is_expected.to contain_file('cronoptions').with(
-            'ensure' => 'file',
-            'content' => %r{--no-reverse-lookups --computer-name example --hostname example.ncl.ac.uk --service host/example --service host/example.ncl.ac.uk},
+          is_expected.to contain_file('cronstub').with(
+            'ensure'  => 'file',
+            'content' => %r{[ "$AUTOUPDATE_ENABLED" = "true" ] || exit 0},
           )
         }
+        it {
+          is_expected.to contain_file('cronoptions').with(
+            'ensure' => 'file',
+            'content' => %r{AUTOUPDATE_OPTIONS=" --computer-name},
+          )
+        }
+        it { is_expected.to have_file_resource_count(2) }
+      else
+        it {
+          is_expected.to contain_file('cronstub').with(
+            'ensure'  => 'file',
+            'content' => %r{--auto-update-interval 60},
+          )
+        }
+        it { is_expected.to have_file_resource_count(1) }
       end
     end
 
+=begin
     context "uninstall from #{os}" do
       let :params do
         {
@@ -59,5 +83,7 @@ describe 'msktutil' do
         it { is_expected.to contain_file('cronoptions').with('ensure' => 'absent') }
       end
     end
+=end
+
   end
 end

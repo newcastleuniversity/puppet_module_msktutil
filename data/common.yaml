@@ -2,9 +2,9 @@
 
 lookup_options:
   msktutil::cronfiles:
-    deep
+    merge: hash
   msktutil::packages:
-    unique
+    merge: unique
 
 msktutil::chmodpath:     /bin/chmod
 msktutil::configpath:    /etc/krb5.conf
@@ -19,10 +19,9 @@ msktutil::makekeytab:    yes
 msktutil::cron:          yes
 msktutil::msktutilpath:  /sbin/msktutil
 msktutil::keytabreplace: 60
+msktutil::extraopts:     "--service host/%{facts.hostname} --service host/%{facts.fqdn}"
 msktutil::packages:
   - msktutil
-msktutil::extraopts: "--service host/%{facts.hostname} --service host/%{facts.fqdn}"
-
 msktutil::cronfiles:
   cronstub:
     params:
