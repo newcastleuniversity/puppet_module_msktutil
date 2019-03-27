@@ -10,7 +10,6 @@ describe 'msktutil' do
     context "install to #{os}" do
       case facts[:osfamily]
       when 'Debian'
-        it { is_expected.to contain_notify('filename is cronoptions') }
         it {
           is_expected.to contain_file('cronoptions').with(
             'ensure'  => 'file',
@@ -53,7 +52,7 @@ describe 'msktutil' do
         }
         it {
           is_expected.to contain_file('cronoptions').with(
-            'ensure' => 'file',
+            'ensure'  => 'file',
             'content' => %r{AUTOUPDATE_OPTIONS=" --computer-name},
           )
         }
@@ -69,7 +68,6 @@ describe 'msktutil' do
       end
     end
 
-=begin
     context "uninstall from #{os}" do
       let :params do
         {
@@ -83,7 +81,5 @@ describe 'msktutil' do
         it { is_expected.to contain_file('cronoptions').with('ensure' => 'absent') }
       end
     end
-=end
-
   end
 end

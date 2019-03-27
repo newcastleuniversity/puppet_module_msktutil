@@ -11,7 +11,6 @@ class msktutil::cron inherits msktutil {
     }
   }
   $msktutil::cronfiles.each | $file, $item | {
-    notify { "filename is ${file}" :}
     file {
       default:
         ensure  => $ensure,

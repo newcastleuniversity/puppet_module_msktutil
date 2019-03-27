@@ -7,9 +7,9 @@ msktutil::cronfiles:
       owner: root
       path:  '/etc/default/msktutil'
     template: msktutil/Debian.cronoptions.erb
-#  'cronstub':
-#    params:
-#      mode:  '0700'
-#      owner: root
-#      path:  '/etc/cron.daily/msktutil'
-#    template: msktutil/Debian.cronstub.erb
+  cronstub:
+    params:
+      mode:  '0700'
+      owner: root
+      path:  '/etc/cron.daily/msktutil'
+    template: msktutil/Debian.cronstub.erb
