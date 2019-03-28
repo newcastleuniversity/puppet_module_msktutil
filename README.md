@@ -12,7 +12,9 @@ Copyright 2016-19 University of Newcastle
 
 ## Usage
 
-With Linux:
+First, precreate the AD account object for the new PC.
+
+If you use a managed Linux workstation:
 
 ```Shell
 # kinit tickets with an s-id.
@@ -35,7 +37,7 @@ kinit sabc123
 
 Replace $pi and description and base.
 
-With Windows:
+If you use a Windows PC:
 
 1. Precreate the computer account in Active Directory and add to it any unusual service principals that you might need.  You might also need to alter the FQDN of the host within AD to be *```yourmachine```*```.ncl.ac.uk```
 2. Reset the precreated computer account.
