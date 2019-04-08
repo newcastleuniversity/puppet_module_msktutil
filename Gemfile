@@ -29,7 +29,7 @@ group :development do
   gem "puppet-module-win-dev-r#{minor_version}",       require: false, platforms: [:mswin, :mingw, :x64_mingw]
   gem "augeas", ">=0.6.4",                             require: false, platforms: [:ruby]
   gem "ruby-augeas", ">=0.5.0",                        require: false, platforms: [:ruby]
-  gem "rspec-puppet-augeas", ">=0.4.0"                 require: false, platforms: [:ruby]
+  gem "rspec-puppet-augeas", ">=0.4.0",                require: false, platforms: [:ruby]
 
 end
 
