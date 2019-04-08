@@ -7,19 +7,19 @@ describe 'msktutil' do
       facts
     end
 
-    context "install to #{os}" do
+    context "install cronjobs to #{os}" do
       case facts[:osfamily]
       when 'Debian'
-        it {
-          is_expected.to contain_file('cronoptions').with(
-            'ensure'  => 'file',
-            'content' => %r{--no-reverse-lookups --computer-name example --hostname example.ncl.ac.uk --service host/example --service host/example.ncl.ac.uk},
-          )
-        }
         it {
           is_expected.to contain_file('cronstub').with(
             'ensure'  => 'file',
             'content' => %r{[ "$AUTOUPDATE_ENABLED" = "true" ] || exit 0},
+          )
+        }
+        it {
+          is_expected.to contain_file('cronoptions').with(
+            'ensure'  => 'file',
+            'content' => %r{--no-reverse-lookups --computer-name example --hostname example.ncl.ac.uk --service host/example --service host/example.ncl.ac.uk},
           )
         }
         it { is_expected.to have_file_resource_count(2) }
@@ -35,7 +35,7 @@ describe 'msktutil' do
       end
     end
 
-    context "install to #{os} with reverse lookup" do
+    context "install cronjobs to #{os} with reverse lookup" do
       let :params do
         {
           'usereversedns' => 'yes',
@@ -68,7 +68,7 @@ describe 'msktutil' do
       end
     end
 
-    context "uninstall from #{os}" do
+    context "uninstall cronjobs from #{os}" do
       let :params do
         {
           'ensure' => 'absent',

@@ -2,7 +2,7 @@
 
 lookup_options:
   msktutil::cronfiles:
-    merge: hash
+    merge: deep
   msktutil::packages:
     merge: unique
 
@@ -27,5 +27,5 @@ msktutil::cronfiles:
     params:
       mode:  '0700'
       owner: root
-      path:  '/etc/cron.daily/msktutil'
+      path:  /etc/cron.daily/msktutil
     template: msktutil/cronstub.erb
