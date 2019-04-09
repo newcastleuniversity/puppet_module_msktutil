@@ -5,7 +5,7 @@ class msktutil::cron inherits msktutil {
   $msktutil::cronfiles.each | $file, $item | {
     file {
       default:
-        ensure  => $realcron,
+        ensure  => $msktutil::realcron,
         content => template($item['template'])
       ;
       $file:
