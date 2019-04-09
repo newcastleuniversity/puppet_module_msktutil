@@ -2,13 +2,13 @@ require 'spec_helper'
 describe 'msktutil' do
   let(:node) { 'example.ncl.ac.uk' }
 
-  on_supported_os.each do |os, facts|
+  on_supported_os.each do |os, os_facts|
     let :facts do
-      facts
+      os_facts
     end
 
     context "install cronjobs to #{os}" do
-      case facts[:osfamily]
+      case os_facts[:osfamily]
       when 'Debian'
         it {
           is_expected.to contain_file('cronstub').with(
@@ -44,7 +44,7 @@ describe 'msktutil' do
         }
       end
 
-      case facts[:osfamily]
+      case os_facts[:osfamily]
       when 'Debian'
         it {
           is_expected.to contain_file('cronstub').with(
@@ -78,7 +78,7 @@ describe 'msktutil' do
       end
 
       it { is_expected.to contain_file('cronstub').with('ensure' => 'absent') }
-      case facts[:osfamily]
+      case os_facts[:osfamily]
       when 'Debian'
         it { is_expected.to contain_file('cronoptions').with('ensure' => 'absent') }
       end
