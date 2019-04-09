@@ -1,5 +1,6 @@
 ---
-msktutil::msktutilpath: /usr/sbin/msktutil
+msktutil::msktutilpath: '/usr/sbin/msktutil'
+
 msktutil::cronfiles:
   cronoptions:
     params:

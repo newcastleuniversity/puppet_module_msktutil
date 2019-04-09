@@ -24,7 +24,7 @@ msktutil::usereversedns: false
 msktutil::installed:     present
 msktutil::ensure:        present
 msktutil::makekeytab:    yes
-msktutil::cron:          yes
+msktutil::enablecron:    yes
 msktutil::msktutilpath:  /sbin/msktutil
 msktutil::keytabreplace: 60
 msktutil::extraopts:     "--service host/%{facts.hostname} --service host/%{facts.fqdn}"

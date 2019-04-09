@@ -2,18 +2,10 @@
 
 class msktutil::cron inherits msktutil {
 
-  case $realcron {
-    'no', false: {
-      $cronensure = absent
-    }
-    default: {
-      $cronensure = file
-    }
-  }
   $msktutil::cronfiles.each | $file, $item | {
     file {
       default:
-        ensure  => $cronensure,
+        ensure  => $realcron,
         content => template($item['template'])
       ;
       $file:
@@ -21,4 +13,5 @@ class msktutil::cron inherits msktutil {
     }
     notify { $file: }
   }
+
 }

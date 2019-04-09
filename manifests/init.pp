@@ -25,8 +25,8 @@ class msktutil (
   Optional[Variant[Enum['yes', 'no'], Boolean]] $usereversedns,
   Optional[Variant[Enum['yes', 'no', 'present', 'absent'], Boolean]] $ensure,
   Optional[Variant[Enum['yes', 'no'], Boolean]] $makekeytab,
-  Optional[Variant[Enum['yes', 'no'], Boolean]] $cron,
-  Optional[Hash] $cronfiles,
+  Optional[Variant[Enum['yes', 'no'], Boolean]] $enablecron,
+  Optional[Hash[String, Hash]] $cronfiles,
   Optional[String] $extraopts
 ) {
 
@@ -53,11 +53,18 @@ class msktutil (
   case $msktutil::ensure {
     'absent', 'no', false: {
       $realmakekeytab = false
-      $realcron       = false
+      $realcron       = absent
     }
     default: {
       $realmakekeytab = $msktutil::makekeytab
-      $realcron       = $msktutil::cron
+      case $msktutil::enablecron {
+        'no', false: {
+          $realcron = absent
+        }
+        default: {
+          $realcron = file
+        }
+      }
       notify { 'moo': }
     }
   }

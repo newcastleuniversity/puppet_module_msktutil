@@ -13,13 +13,13 @@ describe 'msktutil' do
         it {
           is_expected.to contain_file('cronstub').with(
             'ensure'  => 'file',
-          #  'content' => %r{[ "$AUTOUPDATE_ENABLED" = "true" ] || exit 0},
+            'content' => %r{[ "$AUTOUPDATE_ENABLED" = "true" ] || exit 0},
           )
         }
         it {
           is_expected.to contain_file('cronoptions').with(
             'ensure'  => 'file',
-          #  'content' => %r{--no-reverse-lookups --computer-name example --hostname example.ncl.ac.uk --service host/example --service host/example.ncl.ac.uk},
+            'content' => %r{--no-reverse-lookups --computer-name example --hostname example.ncl.ac.uk --service host/example --service host/example.ncl.ac.uk},
           )
         }
         it { is_expected.to have_file_resource_count(2) }
@@ -29,7 +29,7 @@ describe 'msktutil' do
         it {
           is_expected.to contain_file('cronstub').with(
             'ensure'  => 'file',
-          #  'content' => %r{--auto-update-interval 60},
+            'content' => %r{--auto-update-interval 60},
           )
         }
         it { is_expected.not_to contain_file('cronoptions') }
@@ -49,13 +49,13 @@ describe 'msktutil' do
         it {
           is_expected.to contain_file('cronstub').with(
             'ensure'  => 'file',
-          #  'content' => %r{[ "$AUTOUPDATE_ENABLED" = "true" ] || exit 0},
+            'content' => %r{[ "$AUTOUPDATE_ENABLED" = "true" ] || exit 0},
           )
         }
         it {
           is_expected.to contain_file('cronoptions').with(
             'ensure'  => 'file',
-          #  'content' => %r{AUTOUPDATE_OPTIONS=" --computer-name},
+            'content' => %r{AUTOUPDATE_OPTIONS=" --computer-name},
           )
         }
         it { is_expected.to have_file_resource_count(2) }
@@ -63,7 +63,7 @@ describe 'msktutil' do
         it {
           is_expected.to contain_file('cronstub').with(
             'ensure'  => 'file',
-          #  'content' => %r{--auto-update-interval 60},
+            'content' => %r{--auto-update-interval 60},
           )
         }
         it { is_expected.to have_file_resource_count(1) }
