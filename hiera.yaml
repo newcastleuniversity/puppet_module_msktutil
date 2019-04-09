@@ -1,10 +1,12 @@
 ---
 version: 5
-defaults:
-  data_hash: yaml_data
-  datadir: data
+
+defaults:  # Used for any hierarchy level that omits these keys.
+  datadir: data         # This path is relative to hiera.yaml's directory.
+  data_hash: yaml_data  # Use the built-in YAML backend.
+
 hierarchy:
-  - name: osfamily
+  - name: 'osfamily'
     path: "osfamily/%{facts.osfamily}.yaml"
-  - name: common
-    path: common.yaml
+  - name: 'common'
+    path: 'common.yaml'

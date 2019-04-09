@@ -58,6 +58,7 @@ class msktutil (
     default: {
       $realmakekeytab = $msktutil::makekeytab
       $realcron       = $msktutil::cron
+      notify { 'moo': }
     }
   }
 
