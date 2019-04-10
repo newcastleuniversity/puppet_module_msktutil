@@ -11,7 +11,6 @@ class msktutil::cron inherits msktutil {
       $file:
         * => $item['params']
     }
-    notify { $file: }
   }
 
 }

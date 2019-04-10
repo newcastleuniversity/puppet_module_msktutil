@@ -23,8 +23,6 @@ describe 'msktutil' do
             )
           }
           it { is_expected.to have_file_resource_count(2) }
-          it { is_expected.to contain_notify('cronoptions') }
-          it { is_expected.to contain_notify('cronstub') }
         else
           it {
             is_expected.to contain_file('cronstub').with(
