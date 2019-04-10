@@ -65,7 +65,6 @@ class msktutil (
           $realcron = file
         }
       }
-      notify { 'moo': }
     }
   }
 

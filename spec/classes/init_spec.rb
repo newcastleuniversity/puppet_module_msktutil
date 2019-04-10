@@ -13,7 +13,6 @@ describe 'msktutil' do
       it { is_expected.to contain_class('msktutil::install') }
       it { is_expected.to contain_class('msktutil::keytab') }
       it { is_expected.to contain_class('msktutil::cron') }
-      it { is_expected.to contain_notify('moo') }
     end
     context "uninstall from #{os}" do
       let :params do
