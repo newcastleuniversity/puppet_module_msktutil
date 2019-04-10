@@ -19,7 +19,7 @@ describe 'msktutil' do
           it {
             is_expected.to contain_file('cronoptions').with(
               'ensure'  => 'file',
-              'content' => %r{AUTOUPDATE_OPTIONS="--no-reverse-lookups --computer-name},
+              'content' => %r{AUTOUPDATE_OPTIONS="--no-reverse-lookups --computer-name example},
             )
           }
           it { is_expected.to have_file_resource_count(2) }
@@ -27,7 +27,7 @@ describe 'msktutil' do
           it {
             is_expected.to contain_file('cronstub').with(
               'ensure'  => 'file',
-              'content' => %r{--auto-update-interval},
+              'content' => %r{--computer-name example},
             )
           }
           it { is_expected.not_to contain_file('cronoptions') }
@@ -53,7 +53,7 @@ describe 'msktutil' do
           it {
             is_expected.to contain_file('cronoptions').with(
               'ensure'  => 'file',
-              'content' => %r{AUTOUPDATE_OPTIONS=" --computer-name},
+              'content' => %r{AUTOUPDATE_OPTIONS=" --computer-name example},
             )
           }
           it { is_expected.to have_file_resource_count(2) }
@@ -61,7 +61,7 @@ describe 'msktutil' do
           it {
             is_expected.to contain_file('cronstub').with(
               'ensure'  => 'file',
-              'content' => %r{--auto-update-interval},
+              'content' => %r{--computer-name example},
             )
           }
           it { is_expected.to have_file_resource_count(1) }
