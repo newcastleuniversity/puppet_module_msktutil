@@ -8,18 +8,19 @@ describe 'msktutil' do
       let(:facts) { os_facts }
 
       context 'install cronjobs' do
-        case os_facts[:osfamily]
+        it { is_expected.to compile.with_all_deps }
+        case os_facts[:os]['family']
         when 'Debian'
-          it {
-            is_expected.to contain_file('cronstub').with(
-              'ensure'  => 'file',
-              'content' => %r{exec /usr/sbin/msktutil --auto-update},
-            )
-          }
           it {
             is_expected.to contain_file('cronoptions').with(
               'ensure'  => 'file',
-              'content' => %r{AUTOUPDATE_OPTIONS="--no-reverse-lookups --computer-name example},
+              'content' => %r{--no-reverse-lookups --computer-name example},
+            )
+          }
+          it {
+            is_expected.to contain_file('cronstub').with(
+              'ensure'  => 'file',
+              'content' => %r{AUTOUPDATE_OPTIONS},
             )
           }
           it { is_expected.to have_file_resource_count(2) }
@@ -31,10 +32,8 @@ describe 'msktutil' do
             )
           }
           it { is_expected.not_to contain_file('cronoptions') }
-          it { is_expected.to have_file_resource_count(1) }
         end
       end
-
       context 'install cronjobs with reverse lookup' do
         let :params do
           {
@@ -42,18 +41,19 @@ describe 'msktutil' do
           }
         end
 
-        case os_facts[:osfamily]
+        it { is_expected.to compile.with_all_deps }
+        case os_facts[:os]['family']
         when 'Debian'
-          it {
-            is_expected.to contain_file('cronstub').with(
-              'ensure'  => 'file',
-              'content' => %r{exec /usr/sbin/msktutil --auto-update},
-            )
-          }
           it {
             is_expected.to contain_file('cronoptions').with(
               'ensure'  => 'file',
-              'content' => %r{AUTOUPDATE_OPTIONS=" --computer-name example},
+              'content' => %r{--computer-name example},
+            )
+          }
+          it {
+            is_expected.to contain_file('cronstub').with(
+              'ensure'  => 'file',
+              'content' => %r{AUTOUPDATE_OPTIONS},
             )
           }
           it { is_expected.to have_file_resource_count(2) }
@@ -67,7 +67,6 @@ describe 'msktutil' do
           it { is_expected.to have_file_resource_count(1) }
         end
       end
-
       context 'uninstall cronjobs' do
         let :params do
           {
@@ -75,8 +74,9 @@ describe 'msktutil' do
           }
         end
 
+        it { is_expected.to compile.with_all_deps }
         it { is_expected.to contain_file('cronstub').with('ensure' => 'absent') }
-        case os_facts[:osfamily]
+        case os_facts[:os]['family']
         when 'Debian'
           it { is_expected.to contain_file('cronoptions').with('ensure' => 'absent') }
         end

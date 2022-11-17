@@ -1,4 +1,5 @@
 ---
+
 msktutil::msktutilpath: '/usr/sbin/msktutil'
 
 msktutil::cronfiles:

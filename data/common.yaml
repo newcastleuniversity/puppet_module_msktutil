@@ -27,6 +27,6 @@ msktutil::makekeytab:    yes
 msktutil::enablecron:    yes
 msktutil::msktutilpath:  /sbin/msktutil
 msktutil::keytabreplace: 60
-msktutil::extraopts:     "--service host/%{facts.hostname} --service host/%{facts.fqdn}"
+msktutil::extraopts:     "--service host/%{facts.networking.hostname} --service host/%{facts.networking.fqdn}"
 msktutil::packages:
   - msktutil

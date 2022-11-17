@@ -1,14 +1,14 @@
-# Class: msktutil
+# msktutil
 
 Manages Kerberos keytabs on Linux systems in Active Directory environments.
 
 ## Authors
 
-Helen Griffiths <helen.griffiths@newcastle.ac.uk>
+Helen Griffiths; John Snowdon.
 
 ## Copyright
 
-Copyright 2016-19 University of Newcastle
+Copyright 2016-22 University of Newcastle
 
 ## Usage
 
