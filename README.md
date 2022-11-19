@@ -1,6 +1,6 @@
 # msktutil
 
-Manages Kerberos keytabs on Linux systems in Active Directory environments.
+Manages Kerberos keytabs on Linux systems in Active Directory environments.  For how the `msktutil` binary works, see https://github.com/msktutil/msktutil
 
 ## Authors
 
