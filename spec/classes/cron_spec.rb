@@ -20,7 +20,7 @@ describe 'msktutil' do
           it {
             is_expected.to contain_file('cronstub').with(
               'ensure'  => 'file',
-              'content' => %r{AUTOUPDATE_OPTIONS},
+              'content' => %r{^/usr/sbin/msktutil --auto-update \$AUTOUPDATE_OPTIONS},
             )
           }
           it { is_expected.to have_file_resource_count(2) }
@@ -53,7 +53,7 @@ describe 'msktutil' do
           it {
             is_expected.to contain_file('cronstub').with(
               'ensure'  => 'file',
-              'content' => %r{AUTOUPDATE_OPTIONS},
+              'content' => %r{^/usr/sbin/msktutil --auto-update \$AUTOUPDATE_OPTIONS},
             )
           }
           it { is_expected.to have_file_resource_count(2) }

@@ -10,4 +10,4 @@ AUTOUPDATE_OPTIONS=""
 [ -r /etc/default/msktutil ] && . /etc/default/msktutil
 
 [ "$AUTOUPDATE_ENABLED" = "true" ] || exit 0
-exec <%= @msktutilpath %> --auto-update $AUTOUPDATE_OPTIONS
+<%= @msktutilpath %> --auto-update $AUTOUPDATE_OPTIONS
