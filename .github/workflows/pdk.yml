@@ -18,16 +18,6 @@ jobs:
     - name: Clone repository
       uses: actions/checkout@v3
 
-    - name: Run pdk validate with Puppet 5
-      uses: puppets-epic-show-theatre/action-pdk-validate@v1
-      with:
-        puppet-version: "5.5.22"
-        # [optional]
-        # A string indicating the Puppet version to validate against, such as "5.4.2" or "5.5".
-        pe-version: ""
-        # [optional]
-        # A string indicating the PE version to validate against, such as "2017.3.5" or "2018.1".
-
     - name: Run pdk validate with Puppet 6
       uses: puppets-epic-show-theatre/action-pdk-validate@v1
       with:
@@ -39,16 +29,6 @@ jobs:
       with:
         puppet-version: "7.16.0"
         pe-version: ""
-
-    - name: Run unit tests with Puppet 5
-      uses: puppets-epic-show-theatre/action-pdk-test-unit@v1
-      with:
-        puppet-version: "5.5.22"
-        # [optional]
-        # A string indicating the Puppet version to validate against, such as "5.4.2" or "5.5".
-        pe-version: ""
-        # [optional]
-        # A string indicating the PE version to validate against, such as "2017.3.5" or "2018.1".
 
     - name: Run unit tests with Puppet 6
       uses: puppets-epic-show-theatre/action-pdk-test-unit@v1
